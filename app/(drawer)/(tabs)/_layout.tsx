@@ -4,7 +4,6 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
-// Componente de Ícono Personalizado para el menú inferior
 const CustomTabBarIcon = ({ name, color, focused }: { name: any, color: string, focused: boolean }) => {
     return (
         <View style={styles.iconWrapper}>
@@ -34,69 +33,35 @@ export default function TabLayout() {
             fontSize: 10,
         },
       }}>
+      <Tabs.Screen name="index" options={{ title: 'Inicio', tabBarIcon: ({ color, focused }) => (<CustomTabBarIcon name={focused ? 'home' : 'home-outline'} color={color} focused={focused} />), }} />
+      <Tabs.Screen name="prestamos" options={{ title: 'Préstamos', tabBarIcon: ({ color, focused }) => (<CustomTabBarIcon name={focused ? 'cube' : 'cube-outline'} color={color} focused={focused} />), }} />
+      <Tabs.Screen name="inventario" options={{ title: 'Inventario', tabBarIcon: ({ color, focused }) => (<CustomTabBarIcon name={focused ? 'list' : 'list-outline'} color={color} focused={focused} />), }} />
+      <Tabs.Screen name="historial" options={{ title: 'Historial', tabBarIcon: ({ color, focused }) => (<CustomTabBarIcon name={focused ? 'time' : 'time-outline'} color={color} focused={focused} />), }} />
+      <Tabs.Screen name="acerca-de" options={{ title: 'Acerca de', tabBarIcon: ({ color, focused }) => (<CustomTabBarIcon name={focused ? 'information-circle' : 'information-circle-outline'} color={color} focused={focused} />), }} />
+      
+      {/* --- Pantallas que existen en las pestañas pero están ocultas de la barra --- */}
       <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Inicio',
-          tabBarIcon: ({ color, focused }) => (
-            <CustomTabBarIcon name={focused ? 'home' : 'home-outline'} color={color} focused={focused} />
-          ),
-        }}
+        name="estadisticas"
+        options={{ href: null }}
       />
       <Tabs.Screen
-        name="prestamos"
-        options={{
-          title: 'Préstamos',
-          tabBarIcon: ({ color, focused }) => (
-            <CustomTabBarIcon name={focused ? 'cube' : 'cube-outline'} color={color} focused={focused} />
-          ),
-        }}
+        name="perfil"
+        options={{ href: null }}
       />
       <Tabs.Screen
-        name="inventario"
-        options={{
-          title: 'Inventario',
-          tabBarIcon: ({ color, focused }) => (
-            <CustomTabBarIcon name={focused ? 'list' : 'list-outline'} color={color} focused={focused} />
-          ),
-        }}
+        name="notificaciones"
+        options={{ href: null }}
       />
+      {/* --- CAMBIO: Se añade la pantalla de Ayuda --- */}
       <Tabs.Screen
-        name="historial"
-        options={{
-          title: 'Historial',
-          tabBarIcon: ({ color, focused }) => (
-            <CustomTabBarIcon name={focused ? 'time' : 'time-outline'} color={color} focused={focused} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="acerca-de"
-        options={{
-          title: 'Acerca de',
-          tabBarIcon: ({ color, focused }) => (
-            <CustomTabBarIcon name={focused ? 'information-circle' : 'information-circle-outline'} color={color} focused={focused} />
-          ),
-        }}
+        name="ayuda"
+        options={{ href: null }}
       />
     </Tabs>
   );
 }
 
 const styles = StyleSheet.create({
-    iconWrapper: {
-        position: 'relative',
-        width: 40,
-        height: 40,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    activeIconBackground: {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        borderRadius: 20,
-        backgroundColor: '#17A67D',
-        opacity: 0.1,
-    },
+    iconWrapper: { position: 'relative', width: 40, height: 40, justifyContent: 'center', alignItems: 'center' },
+    activeIconBackground: { position: 'absolute', width: '100%', height: '100%', borderRadius: 20, backgroundColor: '#17A67D', opacity: 0.1, },
 });

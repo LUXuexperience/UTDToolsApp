@@ -5,14 +5,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation, useRouter } from 'expo-router';
 import React, { useRef, useState } from 'react';
 import {
-  Dimensions,
-  FlatList,
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
+    Dimensions,
+    FlatList,
+    ImageBackground,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
 } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -148,7 +148,7 @@ export default function HomeScreen() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.quickActionsContainer}>
-                    <TouchableOpacity style={styles.actionCard} onPress={() => router.push('/historial')}>
+                    <TouchableOpacity style={styles.actionCard} onPress={() => router.push('/estadisticas')}>
                         <Feather name="bar-chart-2" size={28} color="#D9A404" />
                         <Text style={styles.actionText}>Mis Estadísticas</Text>
                     </TouchableOpacity>
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     card: { backgroundColor: 'white', borderRadius: 20, paddingVertical: 20, marginBottom: 20, marginHorizontal: width * 0.05, shadowColor: "#000", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.1, shadowRadius: 10, elevation: 5, },
     cardHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 20, paddingHorizontal: 20, },
     welcomeTitle: { fontSize: 22, fontFamily: 'Inter-Bold', color: '#333', paddingHorizontal: 20, marginBottom: 20, textAlign: 'center', },
-    cardTitle: { fontSize: 18, fontFamily: 'Inter-Bold', color: '#333', marginLeft: 10, },
+    cardTitle: { fontSize: 20, fontFamily: 'Inter-Bold', color: '#333', marginLeft: 10, },
     carouselContainer: { height: 180, position: 'relative', },
     carouselCard: { width: CARD_WIDTH, height: '100%', paddingHorizontal: 20, },
     carouselItem: { flex: 1, justifyContent: 'flex-end', borderRadius: 15, overflow: 'hidden', },

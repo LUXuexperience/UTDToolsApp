@@ -9,11 +9,13 @@ export default function AppDrawerLayout() {
       screenOptions={{
         headerShown: false,
         drawerStyle: {
-          width: '85%',
-          backgroundColor: '#fff',
+          // --- CAMBIO: Ancho reducido para un look más moderno ---
+          width: '70%', 
         },
       }}
     >
+      {/* Esta línea le dice al Drawer que su contenido principal
+          es el grupo de rutas "(tabs)". */}
       <Drawer.Screen name="(tabs)" />
     </Drawer>
   );

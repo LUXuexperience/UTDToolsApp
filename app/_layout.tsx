@@ -16,10 +16,11 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack initialRouteName="(auth)">
-      {/* Define el grupo de pantallas de autenticación */}
+    // --- CAMBIO: La ruta inicial ahora es "splash" ---
+    <Stack initialRouteName="splash">
+      {/* Se definen TODAS las rutas de nivel superior que la app puede tener */}
+      <Stack.Screen name="splash" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      {/* Define el grupo de la app principal (el menú lateral) */}
       <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
       <Stack.Screen name="+not-found" />
     </Stack>
