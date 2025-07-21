@@ -2,7 +2,7 @@
 
 import { Feather, Ionicons } from '@expo/vector-icons';
 import { Href, useRouter } from 'expo-router';
-import React, { useState } from 'react'; // <-- 1. Importar useState
+import React, { useState } from 'react';
 import {
     Image,
     SafeAreaView,
@@ -12,9 +12,9 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import CustomAlert from './CustomAlert'; // <-- 2. Importar tu CustomAlert
+import CustomAlert from './CustomAlert'; // Tu componente de alerta
 
-// --- Datos del usuario actualizados ---
+// --- Datos del usuario (sin cambios) ---
 const userData = {
     name: 'Paulina Ale Breceda',
     email: 'paulina_3141230012@utd.edu.mx',
@@ -46,8 +46,6 @@ const DrawerItem = ({ icon, name, href, routeName, activeRoute, navigation }: { 
 
 export default function CustomDrawerContent({ navigation, state }: { navigation: any, state: any }) {
     const router = useRouter();
-
-    // 3. Añadir estado para controlar la visibilidad de la alerta
     const [alertVisible, setAlertVisible] = useState(false);
 
     const activeRouteName = state?.routes[state.index]?.name;
@@ -55,24 +53,39 @@ export default function CustomDrawerContent({ navigation, state }: { navigation:
         ? state?.routes[state.index]?.state?.routes[state.routes[state.index].state.index]?.name
         : activeRouteName;
 
-    // 4. Función para confirmar el cierre de sesión
-    const handleConfirmLogout = () => {
+    // Función que se ejecuta al confirmar el cierre de sesión
+    const handleLogout = () => {
         setAlertVisible(false); // Cierra la alerta
+        console.log("Cerrando sesión y redirigiendo..."); // Log para depuración
         router.replace('/(auth)'); // Navega a la pantalla de login
     };
 
+    // --- CAMBIO: Definir los botones para la alerta ---
+    // Aquí creamos el array de botones que tu componente CustomAlert espera.
+    const logoutButtons = [
+        {
+          text: 'Cancelar',
+          onPress: () => setAlertVisible(false), // Solo cierra la alerta
+          style: 'cancel' as 'cancel', 
+        },
+        {
+          text: 'Cerrar Sesión',
+          onPress: handleLogout, // Llama a la función de cierre de sesión
+          style: 'destructive' as 'destructive',
+        },
+    ];
+
     return (
         <SafeAreaView style={styles.safeArea}>
-            {/* 5. Añadir el componente de alerta al renderizado */}
+            {/* --- CAMBIO: Se actualiza la llamada a CustomAlert --- */}
+            {/* Ahora usamos la prop 'buttons' y los datos correctos */}
             <CustomAlert
                 visible={alertVisible}
-                title="¿Cerrar Sesión?"
-                message="¿Estás seguro de que quieres finalizar tu sesión actual?"
-                onClose={() => setAlertVisible(false)} // El botón "Cancelar" solo cierra la alerta
-                onConfirm={handleConfirmLogout} // El botón "Confirmar" ejecuta el cierre de sesión
-                type="warning"
-                confirmText="Sí, cerrar"
-                cancelText="Cancelar"
+                title="Confirmar Cierre de Sesión"
+                message="¿Estás seguro de que quieres salir?"
+                type="confirm" // 'confirm' es el tipo correcto para el ícono de advertencia
+                buttons={logoutButtons} // Pasamos el array de botones
+                onClose={() => setAlertVisible(false)} // Para cerrar al tocar fuera o con el botón de atrás
             />
 
             <View style={styles.header}>
@@ -110,10 +123,10 @@ export default function CustomDrawerContent({ navigation, state }: { navigation:
             </ScrollView>
 
             <View style={styles.footer}>
-                {/* 6. El botón ahora muestra la alerta en lugar de navegar directamente */}
+                {/* Este botón no cambia, su función es solo mostrar la alerta */}
                 <TouchableOpacity
                     style={styles.logoutButton}
-                    onPress={() => setAlertVisible(true)} // <-- Muestra la alerta
+                    onPress={() => setAlertVisible(true)}
                 >
                     <Feather name="log-out" size={22} color="#D9534F" />
                     <Text style={styles.logoutText}>Cerrar Sesión</Text>
